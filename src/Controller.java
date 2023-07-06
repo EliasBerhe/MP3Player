@@ -128,7 +128,28 @@ public class Controller implements Initializable {
         }
     }
     public void nextMedia(){
-
+        if(songNumber < songs.size()-1){
+            songNumber++;
+            mediaPlayer.stop();
+            if(running){
+                cancelTimer();
+            }
+            media  = new Media(songs.get(songNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            label.setText(songs.get(songNumber).getName());
+            playMedia();
+        }
+        else{
+            songNumber=0;
+            mediaPlayer.stop();
+            if(running){
+                cancelTimer();
+            }
+            media  = new Media(songs.get(songNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            label.setText(songs.get(songNumber).getName());
+            playMedia();
+        }
     }
     public void resetMedia(){
         progressBar.setProgress(0);
