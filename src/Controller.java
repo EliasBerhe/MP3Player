@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
@@ -99,7 +100,8 @@ public class Controller implements Initializable {
         mediaPlayer.play();
     }
     public void pauseMedia(){
-
+        cancelTimer();
+        mediaPlayer.pause();
     }
     public void previousMedia(){
 
@@ -108,7 +110,8 @@ public class Controller implements Initializable {
 
     }
     public void resetMedia(){
-
+        progressBar.setProgress(0);
+        mediaPlayer.seek(Duration.seconds(0));
     }
 
     public void changeSpeed(ActionEvent event){
