@@ -104,7 +104,28 @@ public class Controller implements Initializable {
         mediaPlayer.pause();
     }
     public void previousMedia(){
-
+        if(songNumber >0){
+            songNumber--;
+            mediaPlayer.stop();
+            if(running){
+                cancelTimer();
+            }
+            media  = new Media(songs.get(songNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            label.setText(songs.get(songNumber).getName());
+            playMedia();
+        }
+        else{
+            songNumber=songs.size()-1;
+            mediaPlayer.stop();
+            if(running){
+                cancelTimer();
+            }
+            media  = new Media(songs.get(songNumber).toURI().toString());
+            mediaPlayer = new MediaPlayer(media);
+            label.setText(songs.get(songNumber).getName());
+            playMedia();
+        }
     }
     public void nextMedia(){
 
