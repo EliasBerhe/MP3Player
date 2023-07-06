@@ -93,7 +93,10 @@ public class Controller implements Initializable {
         progressBar.setStyle("-fx-accent: #00FF00");
     }
     public void playMedia(){
-
+        beginTimer();
+        changeSpeed(null);
+        mediaPlayer.setVolume(volumeSlider.getValue()*0.01);
+        mediaPlayer.play();
     }
     public void pauseMedia(){
 
@@ -110,6 +113,29 @@ public class Controller implements Initializable {
 
     public void changeSpeed(ActionEvent event){
 
+    }
+    public void beginTimer(){
+        timer = new Timer();
+        task  = new TimerTask() {
+            @Override
+            public void run() {
+                running = true;
+                double current = mediaPlayer.getCurrentTime().toSeconds();
+                double end = media.getDuration().toSeconds();
+
+                progressBar.setProgress(current/end);
+
+                if(current/end==1){
+                    cancelTimer();
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(task,0, 1000);
+    }
+
+    public void cancelTimer(){
+        running= false;
+        timer.cancel();
     }
 
 
