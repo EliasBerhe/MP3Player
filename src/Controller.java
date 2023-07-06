@@ -157,6 +157,12 @@ public class Controller implements Initializable {
     }
 
     public void changeSpeed(ActionEvent event){
+        if(speedBox.getValue()==null){
+            mediaPlayer.setRate(1);
+        }
+        else{
+            mediaPlayer.setRate(Integer.parseInt(speedBox.getValue().substring(0,speedBox.getValue().length()-1))*0.01);
+        }
 
     }
     public void beginTimer(){
